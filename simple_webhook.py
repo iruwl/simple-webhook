@@ -355,6 +355,13 @@ def get_client_ip():
     return ip
 
 
+def get_base_url():
+    """Return correct base URL (supports reverse proxy HTTPS)"""
+    proto = request.headers.get("X-Forwarded-Proto", request.scheme)
+    host = request.headers.get("X-Forwarded-Host", request.host)
+    return f"{proto}://{host}"
+
+
 @app.route("/")
 def viewer_root():
     """Root endpoint - redirect ke session baru"""
@@ -372,7 +379,7 @@ def viewer_session(session_id):
     cleanup_old_sessions()
     logs = SESSIONS[session_id]["logs"]
 
-    base_url = request.url_root.rstrip('/')
+    base_url = get_base_url()
     webhook_url = f"{base_url}/webhook/{session_id}"
     viewer_url = f"{base_url}/{session_id}"
 
