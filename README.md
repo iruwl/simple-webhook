@@ -1,6 +1,6 @@
 # Simple Webhook
 
-**Simple Webhook** adalah aplikasi Python ringan untuk menerima, menampilkan, dan memantau webhook secara realtime menggunakan **Flask + SSE (Server-Sent Events)**.
+**Simple Webhook** adalah aplikasi Python ringan untuk menerima, menampilkan, dan memantau HTTP Request secara realtime. Dibuat menggunakan framework **Flask + SSE (Server-Sent Events)**.
 Aplikasi ini mendukung **multi-session**, sehingga setiap pengguna memiliki URL webhook terpisah dan log yang tidak tercampur.
 
 
@@ -63,7 +63,32 @@ Contoh output:
 ============================================================
 ```
 
-Aplikasi akan hidup di:
+Buka browser dan ketik alamat berikut:
+
+```
+http://localhost:8080
+```
+
+---
+
+## Menjalankan dengan Docker
+
+1. Pull image
+
+```bash
+docker pull iruwl/simple-webhook:v1
+```
+
+2. Jalankan container
+
+```bash
+docker run -d \
+  -p 8080:8080 \
+  --name simple-webhook \
+  iruwl/simple-webhook:v1
+```
+
+3. Buka browser
 
 ```
 http://localhost:8080
